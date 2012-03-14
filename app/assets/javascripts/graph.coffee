@@ -45,6 +45,8 @@ $ ->
       legend:
         borderWidth: 0
         layout: "vertical"
+        align: 'right'
+        verticalAlign: 'middle'
       xAxis:
         type: 'datetime'
         title:
