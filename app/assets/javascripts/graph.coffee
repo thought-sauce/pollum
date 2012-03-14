@@ -9,28 +9,29 @@ $ ->
         renderTo: this
         zoomType: "xy"
       credits:
-        enabled: false
+        enabled: true
       rangeSelector:
         enabled: true
         buttons: [{
         	type: 'minute',
-        	count: 60,
-        	text: '1h'
+        	count: 360,
+        	text: '6h'
         }, {
         	type: 'day',
         	count: 1,
         	text: '1day'
+        }, {
+        	type: 'week',
+        	count: 1,
+        	text: '1w'
         }, {
         	type: 'month',
         	count: 1,
         	text: '1m'
         }, {
         	type: 'month',
-        	text: '6m'
-        }, {
-        	type: 'year',
-        	count: 1,
-        	text: '1y'
+        	count: 3,
+        	text: '3m'
         }, {
         	type: 'all',
         	text: 'All'
