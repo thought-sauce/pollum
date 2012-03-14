@@ -10,6 +10,35 @@ $ ->
         zoomType: "xy"
       credits:
         enabled: false
+      rangeSelector:
+        enabled: true
+        buttons: [{
+        	type: 'minute',
+        	count: 60,
+        	text: '1h'
+        }, {
+        	type: 'day',
+        	count: 1,
+        	text: '1day'
+        }, {
+        	type: 'month',
+        	count: 1,
+        	text: '1m'
+        }, {
+        	type: 'month',
+        	text: '6m'
+        }, {
+        	type: 'year',
+        	count: 1,
+        	text: '1y'
+        }, {
+        	type: 'all',
+        	text: 'All'
+        }]
+      navigator:
+        enabled: true
+      scrollbar:
+        enabled: true
       title:
         text: null
       legend:
