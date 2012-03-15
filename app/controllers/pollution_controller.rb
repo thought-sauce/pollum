@@ -6,4 +6,7 @@ class PollutionController < ApplicationController
   def compare
     @metric = params[:metric] || :fsp
   end
+
+  def awake
+  end
 end
