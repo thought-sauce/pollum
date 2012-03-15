@@ -1,6 +1,6 @@
 !!! 5
 %head
-  %title= title :site_name => "Pollum is Gollum's polluted brother"
+  %title= title :site_name => "HK Air Pollution Graphs"
   %meta{name: :description, content: yield(:description)}
   %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
   = stylesheet_link_tag "application"
@@ -17,17 +17,17 @@
           %span.icon-bar
           %span.icon-bar
           %span.icon-bar
-        %a.brand{href: root_path} Pollum
+        %a.brand{href: root_path} HK Air Pollution
         .nav-collapse
           %ul.nav
             %li{class: active_if(params[:action] == 'index')}
               %a{href: root_path}
                 %i.icon-map-marker.icon-white
-                Stations
+                Individual Stations
             %li
               %a{href: compare_path}
                 %i.icon-signal.icon-white
-                Metrics
+                Compare Stations
                     
   .container
     - flash.each do |type, message|
@@ -37,10 +37,12 @@
     = yield
     %footer.footer
       .container
+        %p
+          %small Developed over a couple of lunches - improvements and new features will be coming
         %p.pull-right
           %small= t("developed_by")
           %strong ThoughtSauce, 83bits
           and
           %strong Eddie
-          
+
 
