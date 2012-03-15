@@ -33,7 +33,10 @@ group :development do
   gem "pry-rails", "~> 0.1.6"
 end
 
+# exception notifications
+gem "airbrake"
 
+# jquery
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
