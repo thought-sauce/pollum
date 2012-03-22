@@ -1,5 +1,5 @@
 class PollutionController < ApplicationController
-  def index
+  def station
     @station = params[:station] || :Central
   end
   

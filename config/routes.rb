@@ -1,6 +1,6 @@
 Pollum::Application.routes.draw do
   
-  root :to => 'pollution#index'
+  root :to => 'pollution#compare'
   get 'pollution/:station' => 'pollution#index', as: :pollution
   get 'compare_pollution' => 'pollution#compare', as: :compare
   get 'compare_pollution/:metric' => 'pollution#compare', as: :compare_metric
