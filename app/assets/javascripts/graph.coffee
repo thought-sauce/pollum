@@ -12,6 +12,7 @@ $ ->
         enabled: true
       rangeSelector:
         enabled: true
+        selected: 2
         buttons: [{
         	type: 'minute',
         	count: 360,
