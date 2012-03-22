@@ -4,10 +4,10 @@
 en:
   reading:
     metrics:
-      no2: "NO2"
-      o3: "O3"
-      so3: "SO3"
-      co: "CO"
-      rsp: "RSP"
-      fsp: "FSP"
+      no2: "Nitrogen Dioxide"
+      o3: "Ozone"
+      so3: "Sulphur Trioxide"
+      co: "Carbon Monoxide"
+      rsp: "PM 10"
+      fsp: "PM 2.5"
   

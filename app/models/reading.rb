@@ -14,8 +14,14 @@ class Reading
               :Kwun_Tong, :Sha_Tin, :Sham_Shui_Po, :Tai_Po, :Tap_Mun,
               :Tsuen_Wan, :Tung_Chung, :Yuen_Long, :Mong_Kok,
               :Causeway_Bay]
-  METRICS  = [:no2, :o3, :so3, :co, :rsp, :fsp]
-  
+
+  METRICS  = {:no2 => 'Nitrogen Dioxide',
+              :o3 => 'Ozone',
+              :so3 => 'Sulphur Trioxide',
+              :co => 'Carbon Monoxide',
+              :rsp => 'PM 10',
+              :fsp => 'PM 2.5'
+  }
   after_initialize :set_id
   
   def set_id
