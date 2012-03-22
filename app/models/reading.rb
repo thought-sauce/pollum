@@ -40,7 +40,7 @@ class Reading
           time = Time.zone.parse(cells.first.text)
           cells[1..6].each_with_index do |value, i|
             next if value.text =~ /--/
-            reading = new(station: station, time: time, metric: METRICS[i], value: value.text) 
+            reading = new(station: station, time: time, metric: METRICS.keys[i], value: value.text)
             readings[reading.id] = reading
           end
           find(readings.keys).each do |existing_reading|
