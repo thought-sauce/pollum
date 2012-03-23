@@ -17,7 +17,7 @@ class Reading
 
   METRICS  = {:no2 => 'Nitrogen Dioxide',
               :o3 => 'Ozone',
-              :so2 => 'Sulphur Dioxide',
+              :so3 => 'Sulphur Dioxide',
               :co => 'Carbon Monoxide',
               :rsp => 'PM 10',
               :fsp => 'PM 2.5'
@@ -33,7 +33,7 @@ class Reading
   PLOT_OPTIONS = {:dashStyle => 'shortdash', :width => 2}
   WHO_LEVELS = {:no2 => [{:label => {:text => "WHO 1hr limit"},  :color => 'black', :value => 200 }],
                 :o3  => [{:label => {:text => "WHO 8hr limit"},  :color => 'black', :value => 100}],
-                :so2 => [{:label => {:text => "WHO 24hr limit"}, :color => 'black', :value => 20}],
+                :so3 => [{:label => {:text => "WHO 24hr limit"}, :color => 'black', :value => 20}],
                 :co  => [{:label => {:text => "WHO 1hr limit"},  :color => 'black', :value => 30000}, {:label => {:text => "WHO 8hr limit"}, :color => 'red', :value => 10000}],
                 :rsp => [{:label => {:text => "WHO 24hr limit"}, :color => 'black', :value => 50},    {:label => {:text => "WHO 1yr limit"}, :color => 'red', :value => 20}],
                 :fsp => [{:label => {:text => "WHO 24hr limit"}, :color => 'black', :value => 25},    {:label => {:text => "WHO 1yr limit"}, :color => 'red', :value => 10}]
