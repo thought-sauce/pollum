@@ -4,7 +4,8 @@ class PollutionController < ApplicationController
   end
   
   def compare
-    @metric = params[:metric] || :fsp
+    @metric = params[:metric].try(:to_sym) || :fsp
+    @plot_lines = Reading.plot_lines(@metric)
   end
 
   def awake

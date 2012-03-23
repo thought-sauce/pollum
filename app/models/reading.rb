@@ -22,6 +22,22 @@ class Reading
               :rsp => 'PM 10',
               :fsp => 'PM 2.5'
   }
+
+ # SO2	24hr	20
+ # PM10	24hr	50	1yr	20
+ # PM2.5	24hr	25	1yr	10
+ # NO2	1hr	200
+ # O3		8hr	100
+ # CO		1hr	30000	8hr	10000
+
+  PLOT_OPTIONS = {:dashStyle => 'shortdash', :width => 2}
+  WHO_LEVELS = {:no2 => [{:label => {:text => "1hr"},  :color => 'green', :value => 200 }],
+                :o3  => [{:label => {:text => "8hr"},  :color => 'green', :value => 100}],
+                :so3 => [{:label => {:text => "24hr"}, :color => 'green', :value => 20}],
+                :co  => [{:label => {:text => "1hr"},  :color => 'green', :value => 30000}, {:label => {:text => "8hr"}, :color => 'red', :value => 10000}],
+                :rsp => [{:label => {:text => "24hr"}, :color => 'green', :value => 50},    {:label => {:text => "1yr"}, :color => 'red', :value => 20}],
+                :fsp => [{:label => {:text => "24hr"}, :color => 'green', :value => 25},    {:label => {:text => "1yr"}, :color => 'red', :value => 10}]
+  }
   after_initialize :set_id
   
   def set_id
@@ -69,6 +85,14 @@ class Reading
       end
       series_array
     end
+
+    def plot_lines(metric)
+      lines = []
+      WHO_LEVELS[metric].each do |line|
+        lines << line.merge(PLOT_OPTIONS)
+      end
+      lines
+    end
     
     private
     
@@ -89,6 +113,5 @@ class Reading
     def station_url(station)
       "http://www.epd-asg.gov.hk/english/24pollu_fsp/#{station}_fsp.html"
     end
-    
   end
 end

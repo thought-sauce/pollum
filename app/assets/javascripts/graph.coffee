@@ -56,6 +56,7 @@ $ ->
         allowDecimals: false
         min: 0
         gridLineColor: "#eeeeee"
+        plotLines: graph.data("levels")
         title:
           text: null
       series: graph.data("series")
