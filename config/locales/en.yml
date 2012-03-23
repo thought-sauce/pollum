@@ -6,7 +6,7 @@ en:
     metrics:
       no2: "Nitrogen Dioxide"
       o3: "Ozone"
-      so3: "Sulphur Trioxide"
+      so2: "Sulphur Dioxide"
       co: "Carbon Monoxide"
       rsp: "PM 10"
       fsp: "PM 2.5"
