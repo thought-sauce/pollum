@@ -42,6 +42,9 @@ gem 'jquery-rails'
 # redirect if accessed on a different host
 gem 'rack-canonical-host'
 
+# new relic
+gem 'newrelic_rpm'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

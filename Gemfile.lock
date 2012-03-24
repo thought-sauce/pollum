@@ -87,6 +87,7 @@ GEM
     multi_json (1.1.0)
     net-http-digest_auth (1.2)
     net-http-persistent (1.9)
+    newrelic_rpm (2.13.4)
     nokogiri (1.5.2)
     polyglot (0.3.3)
     pry (0.9.8.4)
@@ -159,6 +160,7 @@ DEPENDENCIES
   kaminari (~> 0.13.0)
   mechanize (= 2.0.1)
   mongoid (~> 2.4)
+  newrelic_rpm
   pry (~> 0.9.8.4)
   pry-rails (~> 0.1.6)
   rack-canonical-host
