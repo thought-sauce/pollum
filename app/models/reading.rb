@@ -7,6 +7,7 @@ class Reading
   field :time, type: Time
   
   index [[:station, Mongo::DESCENDING ],[:time, Mongo::ASCENDING],[:metric, Mongo::ASCENDING]]
+  index [[:metric, Mongo::ASCENDING],[:time, Mongo::ASCENDING]]
   
   identity :type => String
   
