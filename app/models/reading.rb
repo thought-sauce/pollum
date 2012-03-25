@@ -1,46 +1,46 @@
 class Reading
   include Mongoid::Document
-  
+
   field :station
   field :metric
   field :value, type: Float, default: 0
   field :time, type: Time
-  
-  index [[:station, Mongo::DESCENDING ],[:time, Mongo::ASCENDING],[:metric, Mongo::ASCENDING]]
-  index [[:metric, Mongo::ASCENDING],[:time, Mongo::ASCENDING]]
-  
+
+  index [[:station, Mongo::DESCENDING], [:time, Mongo::ASCENDING], [:metric, Mongo::ASCENDING]]
+  index [[:metric, Mongo::ASCENDING], [:time, Mongo::ASCENDING]]
+
   identity :type => String
-  
+
   STATIONS = [:Central, :Central_Western, :Eastern, :Kwai_Chung,
               :Kwun_Tong, :Sha_Tin, :Sham_Shui_Po, :Tai_Po, :Tap_Mun,
               :Tsuen_Wan, :Tung_Chung, :Yuen_Long, :Mong_Kok,
               :Causeway_Bay]
 
-  METRICS  = {:no2 => 'Nitrogen Dioxide',
-              :o3 => 'Ozone',
-              :so3 => 'Sulphur Dioxide',
-              :co => 'Carbon Monoxide',
-              :rsp => 'PM 10',
-              :fsp => 'PM 2.5'
+  METRICS = {:no2 => 'Nitrogen Dioxide',
+             :o3 => 'Ozone',
+             :so3 => 'Sulphur Dioxide',
+             :co => 'Carbon Monoxide',
+             :rsp => 'PM 10',
+             :fsp => 'PM 2.5'
   }
 
- # SO2	24hr	20
- # PM10	24hr	50	1yr	20
- # PM2.5	24hr	25	1yr	10
- # NO2	1hr	200
- # O3		8hr	100
- # CO		1hr	30000	8hr	10000
+  # SO2	24hr	20
+  # PM10	24hr	50	1yr	20
+  # PM2.5	24hr	25	1yr	10
+  # NO2	1hr	200
+  # O3		8hr	100
+  # CO		1hr	30000	8hr	10000
 
   PLOT_OPTIONS = {:dashStyle => 'shortdash', :width => 2}
-  WHO_LEVELS = {:no2 => [{:label => {:text => "WHO 1hr limit"},  :color => 'black', :value => 200 }],
-                :o3  => [{:label => {:text => "WHO 8hr limit"},  :color => 'black', :value => 100}],
+  WHO_LEVELS = {:no2 => [{:label => {:text => "WHO 1hr limit"}, :color => 'black', :value => 200}],
+                :o3 => [{:label => {:text => "WHO 8hr limit"}, :color => 'black', :value => 100}],
                 :so3 => [{:label => {:text => "WHO 24hr limit"}, :color => 'black', :value => 20}],
-                :co  => [{:label => {:text => "WHO 1hr limit"},  :color => 'black', :value => 30000}, {:label => {:text => "WHO 8hr limit"}, :color => 'red', :value => 10000}],
-                :rsp => [{:label => {:text => "WHO 24hr limit"}, :color => 'black', :value => 50},    {:label => {:text => "WHO 1yr limit"}, :color => 'red', :value => 20}],
-                :fsp => [{:label => {:text => "WHO 24hr limit"}, :color => 'black', :value => 25},    {:label => {:text => "WHO 1yr limit"}, :color => 'red', :value => 10}]
+                :co => [{:label => {:text => "WHO 1hr limit"}, :color => 'black', :value => 30000}, {:label => {:text => "WHO 8hr limit"}, :color => 'red', :value => 10000}],
+                :rsp => [{:label => {:text => "WHO 24hr limit"}, :color => 'black', :value => 50}, {:label => {:text => "WHO 1yr limit"}, :color => 'red', :value => 20}],
+                :fsp => [{:label => {:text => "WHO 24hr limit"}, :color => 'black', :value => 25}, {:label => {:text => "WHO 1yr limit"}, :color => 'red', :value => 10}]
   }
   after_initialize :set_id
-  
+
   def set_id
     self.id = "#{station}-#{metric}-#{time.to_i}" if new_record?
   end
@@ -60,11 +60,11 @@ class Reading
             reading = new(station: station, time: time, metric: METRICS.keys[i], value: value.text)
             readings[reading.id] = reading
           end
-          find(readings.keys).each do |existing_reading|
-            begin
+          begin
+            find(readings.keys).each do |existing_reading|
               readings.delete(existing_reading.id)
-            rescue
             end
+          rescue
           end
           collection.insert(readings.values.collect(&:as_document))
         end
@@ -72,19 +72,21 @@ class Reading
     end
 
     def to_series(aggregator = :metric)
-      series_hash = Hash.new do |hash, key| hash[key] = Hash.new end
+      series_hash = Hash.new do |hash, key|
+        hash[key] = Hash.new
+      end
       records = all.asc(:time)
-      records.each do |i|   
+      records.each do |i|
         series_hash[i.send(aggregator)][i.time] = i.value
       end
       series_array = []
-      series_hash.each_pair do |metric,values|
+      series_hash.each_pair do |metric, values|
         name = aggregator == :metric ? I18n.t("reading.metrics.#{metric}") : metric.to_s.humanize.titleize
         series_array << {
-          name: name,
-          # pointInterval: 24 * 3600 * 1000,
-          # pointStart: values.keys.min.utc.to_i * 1000,
-          data: format_serie(values)
+            name: name,
+            # pointInterval: 24 * 3600 * 1000,
+            # pointStart: values.keys.min.utc.to_i * 1000,
+            data: format_serie(values)
         }
       end
       series_array
@@ -97,9 +99,9 @@ class Reading
       end
       lines
     end
-    
+
     private
-    
+
     def format_serie(hash)
       data = []
       # min = hash.keys.min
@@ -108,12 +110,12 @@ class Reading
       # (min.to_date...max.to_date).times do |day|
       #   data << hash[hash.keys.min + i.days] || 0
       # end
-      hash.each_pair do |k,v|
+      hash.each_pair do |k, v|
         data << [k.to_i * 1000, v]
       end
       data
     end
-    
+
     def station_url(station)
       "http://www.epd-asg.gov.hk/english/24pollu_fsp/#{station}_fsp.html"
     end
