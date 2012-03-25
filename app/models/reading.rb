@@ -61,7 +61,10 @@ class Reading
             readings[reading.id] = reading
           end
           find(readings.keys).each do |existing_reading|
-            readings.delete(existing_reading.id)
+            begin
+              readings.delete(existing_reading.id)
+            rescue
+            end
           end
           collection.insert(readings.values.collect(&:as_document))
         end
