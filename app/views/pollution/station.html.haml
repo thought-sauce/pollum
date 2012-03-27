@@ -9,4 +9,4 @@
             = station.to_s.humanize.titleize
   .span10
     %h1 Pollution in #{@station.to_s.humanize.titleize}
-    .graph{'data-series' => Reading.where(station: @station).to_series.to_json}
+    .graph{'data-series' => Reading.where(station: @station).and(:time.gte => Time.now - 7.days).to_series.to_json}
