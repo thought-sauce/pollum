@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.2'
 
+# don't a fool, use thin
+gem "thin"
+
 gem 'sass-rails',   '~> 3.2.3'
 
 gem "mongoid", "~> 2.4"
