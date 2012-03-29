@@ -10,3 +10,4 @@
   .span10
     %h1 Compare Pollution metric #{I18n.t("reading.metrics.#{@metric}")}
     .graph{'data-series' => Reading.where(metric: @metric).and(:time.gte => Time.now - 7.days).to_series(:station).to_json, 'data-levels' => @plot_lines.to_json}
+    %button#toggle Toggle all stations

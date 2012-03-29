@@ -60,3 +60,10 @@ $ ->
         title:
           text: null
       series: graph.data("series")
+
+    $("#toggle").click ->
+        for series in chart.series
+          if series.visible
+            series.hide()
+          else
+            series.show()
