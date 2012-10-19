@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
+ruby "1.9.3"
 
 gem 'rails', '3.2.2'
 
-# don't a fool, use thin
+# don't a fool, use unicorn
 gem "thin"
+gem "unicorn"
 
 gem 'sass-rails',   '~> 3.2.3'
 
@@ -34,6 +36,8 @@ end
 group :development do
   gem 'pry', '~> 0.9.8.4'
   gem "pry-rails", "~> 0.1.6"
+
+  gem 'foreman'
 end
 
 # exception notifications
